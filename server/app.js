@@ -5,7 +5,7 @@ const cors = require('cors');
 const { Client } = require('pg');
 const app = express();
 const path = require('path');
-const PORT = 3000;
+const port = 5000;
 app.use(express.static('./dist/projectory'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -41,7 +41,8 @@ app.use(function(req, res, next) {
 // app.use('/', express.static(path.join(__dirname, '/../client/public/')));
 app.use(express.static('/../client/public/'));
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/../client/public/index.html'));
+  // res.send('hello world');
+  res.json({ success: true });
 });
 
 
