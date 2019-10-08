@@ -1,0 +1,45 @@
+.task-item:hover{
+    background-color: #323337;
+    border-radius: 0.625rem;
+  }
+  .task-item.cross{
+    background-color: #373332;
+    border-radius: 0.625rem;
+  }
+  .task-item{
+    display: flex;
+    justify-content: space-between;
+    height: 2rem;
+    border-style: none none solid none; 
+    border-color: rgb(41, 48, 68);
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.4rem 0 0.4rem;
+    .task-pick-by-name{
+      display: flex;
+      .task-pick{
+        height: 1.25rem;
+        width: 2rem;
+        background-image: url("../Assets/Dark theme/checkbox_regular.svg");
+        background-repeat: no-repeat;
+        background-position-y: center;
+        &.checked{
+            background-image: url("../Assets/Dark theme/check.svg");
+            background-repeat: no-repeat;
+        background-position-y: center;
+        height: 1.25rem;
+        width: 2rem;
+        }
+      }
+      .task-name{
+        color: #CCD4DC;	
+        font-size: 1.2rem;
+        background: transparent;
+        border: none;
+        margin-bottom: 0.8rem;
+      }
+    } 
+  }
+
+  .checked{
+    background-image: url("../Assets/Dark theme/check.svg");
+  }

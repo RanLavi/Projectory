@@ -1,0 +1,151 @@
+html, body, #root {
+  width:100%;
+  height: 100%;
+  margin: 0rem;
+}
+
+.loginPageContainer{
+  background-image:  url("../Assets/Dark theme/signin_bg.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.logo{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: 1rem 1rem; /* Moving the projectory logo a bit from the top left corner */
+  &.Dark{
+    background-image:  url("../Assets/Dark theme/logo.svg");
+  }
+  &.Turquoise{
+    background-image:  url("../Assets/Tourquise theme/logo.svg");
+  }
+}
+
+.loginBox{
+  height: 31.375rem;
+  width: 26.875rem;
+  border-radius: 0.625rem;
+  background-color: #2A2B2E;
+  position:absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  margin: auto;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 2.5rem;
+}
+
+.signIn{
+  height: 2.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 2rem;
+  &.Dark{
+    color: red;
+  }
+  &.Turquoise{
+    color: #42C8B5;
+  }
+}
+
+.enterDetailsBelow{
+  height: 1.5rem;
+  /* width: 11rem; */
+  color: #CCD4DC;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+/* Same as enterDetailsBelow besides the margin-bottom */ 
+.enterEmailAddress, .enterPassword{
+  width: 100%;
+  height: 1.5rem;
+  /* width: 11rem; */
+  color: #CCD4DC;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.rectangle{
+  height: 3.5rem;
+  /* width: 22rem; */
+  border-radius: 0.625rem;
+  background-color: #FFFFFF;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.emailText, .passwordText{
+  font-size: 1rem;
+  line-height: 3.15rem;
+  margin-left: 1.5rem;
+  width: 75%; /* Not to be too short but also not stepping over the showPassword icon */
+  border: none; /* There's an automatic border, removed it */
+}
+
+/* This removes the outline while standing on email or password field */
+input:focus{
+  outline: none;
+}
+
+.forgotPassword{
+  float: right;
+}
+
+.showPassword{
+    background-image: url("../Assets/Dark theme/show_password.svg");
+    background-repeat: no-repeat;
+    /* float: right; */
+    /* line-height: 3.3rem; */
+    position: absolute; /* This 3 next lines center the object */
+    top: 0; bottom: 0; left: 0; right: 0;
+    margin: auto;
+    margin-right: 1.5rem; /* Here we place it near the right corner of the rectangle */
+    width: 1.375rem; /* Size of image */
+    height: 1rem; /* Size of image */
+} 
+
+.showPasswordText{
+  /* background-repeat: no-repeat; */
+  /* float: right; */
+  /* line-height: 3.3rem; */
+  position: absolute; 
+  top: 0; bottom: 0; left: 0; right: 0;
+  margin: auto;
+  margin-right: 1.5rem; /* Here we place it near the right corner of the rectangle */
+  width: 1.375rem; /* Size of image */
+  height: 1.3rem; /* Size of image */
+  &.Dark{
+    background-image: url("../Assets/Dark theme/hide_password.svg");
+  }
+  &.Turquoise{
+    background-image: url("../Assets/Tourquise theme/hide_password.svg");
+  }
+}
+
+.submitForm{
+  height: 3rem;
+  width: 50%;
+  border-radius: 1.5rem;
+  color: white;
+  &.Dark{
+    background-color: #FF5252;
+  }
+  &.Turquoise{
+    background-color: #42C8B5;
+  }
+}
+
+/* * {
+	border-style: solid;
+	border-color: blue;
+} */

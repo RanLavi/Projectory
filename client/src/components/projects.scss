@@ -1,0 +1,73 @@
+.project-item:hover{
+  background-color: #32343f;
+  border-radius: 0.625rem;
+  .project-pick{
+    height: 1.25rem;
+    width: 2rem;
+    background-image: url("../Assets/Dark theme/checkbox_regular.svg");
+    background-repeat: no-repeat;
+    background-position-y: center;
+  }
+  .project-name-and-date{
+    .project-create-date{
+      display:none;
+    }
+    .project-delete{
+      display: block;
+      background-image: url("../Assets/Dark theme/delete.svg");
+      background-repeat: no-repeat;
+      height: 1.2rem;
+      width: 1.5rem;
+    }
+  }
+}
+  .project-item{
+    display: flex;
+    justify-content: space-between;
+    height: 2rem;
+    border-style: none none solid none; 
+    border-color: rgb(41, 48, 68);
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.4rem 0 0.4rem;
+      // position: relative;
+      .project-pick{
+        height: 1.25rem;
+        width: 2rem;
+        background-image: url("../Assets/Dark theme/checkbox_regular.svg");
+        background-repeat: no-repeat;
+        background-position-y: center;
+        // position: absolute;
+        &.checked{
+            background-image: url("../Assets/Dark theme/check.svg");
+            // position: absolute;
+            height: 1.25rem;
+            width: 2rem;
+        }
+      }
+        .project-name-and-date{
+          display: flex;
+          justify-content: space-between;
+          .project-name{
+            color: #CCD4DC;	
+            font-size: 1.2rem;
+            background: transparent;
+            border: none;
+            margin-bottom: 0.8rem;
+          }
+        
+        .project-create-date{
+            color: #CCD4DC;	
+            font-size: 1rem;
+            opacity: 0.5;
+        }
+        .project-delete{
+          display: none;
+        }
+       }
+    }
+
+    .cross{
+      text-decoration: line-through;
+      width:100%;
+    }
+

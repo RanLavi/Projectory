@@ -1,0 +1,179 @@
+html, body, #root {
+  width:100%;
+  height: 100%;
+  margin: 0rem;
+}
+
+.projectsPageContainer{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: #323337;
+  
+  .sideMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 6rem;
+    background-color: #2A2B2E;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 40%;
+      width: 100%;
+      
+      .menuIcon{
+        background-image:  url("../Assets/Dark theme/menu.svg");
+        height: 0.75rem;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .menu-home-container{
+        .menuHome{
+          mask-image:  url("../Assets/Dark theme/home.svg");
+          mask-position: center;
+          mask-repeat: no-repeat;
+          height: 1.25rem;
+          background:#CCD4DC;
+        }
+         .sideMenuText{
+          height: 1rem;
+          color: #CCD4DC;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-align: center;
+        }
+      }
+
+
+      .menu-about-container{
+        .menuAbout{
+          mask-image:  url("../Assets/Dark theme/about.svg");
+          mask-position: center;
+          mask-repeat: no-repeat;
+          height: 1.25rem;
+          background:#CCD4DC;
+        }
+        .sideMenuText{
+          height: 1rem;
+          color: #CCD4DC;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-align: center;
+        }
+      }
+
+      .menu-settings-container{
+        .menuSettings{
+          mask-image:  url("../Assets/Dark theme/settings.svg");
+          mask-position: center;
+          mask-repeat: no-repeat;
+          height: 1.25rem;
+          background:#CCD4DC;
+        }
+        .sideMenuText{
+          height: 1rem;
+          color: #CCD4DC;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-align: center;
+        }
+      }
+
+    
+
+    }
+    .bottomSideMenu{
+      margin-bottom: 2rem;
+      .menuLogout{
+        mask-image:  url("../Assets/Dark theme/logout.svg");
+        height: 1.125rem;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        background:#CCD4DC;
+      }
+      .sideMenuTextLogout{
+        height: 1rem;
+        color: #CCD4DC;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.mainMenu{
+  height: 100%;
+  width: calc( 100% - 6rem);
+  .main-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem 0 3rem;
+    .logo{
+      width: 100%;
+      height: 6rem;
+      background-repeat: no-repeat;
+      background-position: left;
+      &.Dark{
+        background-image:  url("../Assets/Dark theme/logo.svg");
+      }
+      &.Turquoise{
+        background-image:  url("../Assets/Tourquise theme/logo.svg");
+      }
+    }
+    .user{
+      color: #CCD4DC;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+  }
+  .lists{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: calc( 100% - 9.5rem);
+  }
+}
+
+.hide-logout{
+  display: none;
+}
+
+.show-logout{
+  display: initial;
+}
+
+
+.Dark.clicked {
+  > :first-child {
+    background: red !important;
+  }
+  > :last-child {
+    color: red !important;
+  }
+}
+
+.Turquoise.clicked{
+  > :first-child {
+    background: #42C8B5 !important;
+  }
+  > :last-child {
+    color: #42C8B5 !important;
+  }
+}
+// * {
+// 	border-style: solid;
+// 	border-color: blue;
+// } 
+
+
+
+
+
