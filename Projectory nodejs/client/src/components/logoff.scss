@@ -1,0 +1,90 @@
+
+.modal-container {
+    display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+//   background-color: red; /* Black w/ opacity */
+  .logoff-container{
+    width: 22rem;
+    height: 14rem;
+    position: absolute;
+    left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+    margin:auto;
+    background-color: #404146;
+
+    transform: trnslate(-50%, -50%);
+
+    
+  
+      .logoff-header{
+        display:flex;
+        justify-content: space-between;
+        height: 4rem;
+        box-sizing: border-box;
+        border: 1px solid;
+        background-color: #323337;
+        padding: 1rem 1rem 1rem 1rem;
+        .logoff-header-text{
+            height: 1.5rem;
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            font-weight: 600;
+
+        }
+        .logoff-header-x{
+            color: #FFFFFF;
+            height: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+      }
+      .logoff-body-container{
+        padding: 1rem 1rem 1rem 1rem;
+
+        .logoff-body-text{
+            height: 3rem;
+            color: #CCD4DC;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 4rem;
+            // line-height: 1.5rem;
+        }
+        .logoff-bottom-container{
+            display:flex;
+            justify-content: flex-end;
+            position:bottom;
+            .logoff-bottom-logout-text{
+                margin-right:2rem;
+                &.Dark{
+                    color:red;
+                }
+                &.Turquoise{
+                    color: #42C8B5;
+                }
+            }
+            .logoff-bottom-stay-text{
+                border-radius: 1.5rem;
+                color: white;
+                width: 3.5rem;
+                text-align: center;
+                &.Dark {
+                    background-color: #FF5252;
+                }
+                &.Turquoise {
+                    background-color: #42C8B5;
+                }
+            }
+        }
+      }
+  }
+}

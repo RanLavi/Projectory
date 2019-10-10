@@ -1,0 +1,203 @@
+require('dotenv').config();
+const { Client } = require('pg');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const router = express.Router();
+const app = express();
+const path = require('path');
+const port = 5000;
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use('/api',router)
+
+app.use(function(req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+});
+
+//connect to db
+const connectionString = 'postgres://postgres:postgres@localhost:5432/projectory';
+
+
+// const connectionString = process.env.DATABASE_URL;
+const client = new Client({
+  connectionString: connectionString
+});
+client.connect();
+
+// app.use('/', express.static(path.join(__dirname, '/../client/public/')));
+app.use(express.static('/../client/public/'));
+router.get('/', function(req, res) {
+  // res.send('hello world');
+  res.json({ success: true });
+});
+
+// app.get('/getUser', function(req, res) {
+//   // res.send('hello world');
+//   res.json({ success: true });
+// });
+
+// app.post('/userConnection', function(req, res){
+//   `INSERT INTO users (email) VALUES ('${req.body.email}');`
+//    const user = {
+//       projects: [],
+//       email: req.body.email,
+//       theme: 'Dark'
+//     };
+//     console.log(req.body);
+//     res.status(200).send(JSON.stringify(user));
+//   }
+// );
+
+  app.post('/userConnection', function(req, res, next){
+    client.query(`SELECT * FROM users WHERE email = '${req.body.email}'`, async function(err,result) {
+      if (result.rows.length === 0) {
+        client.query(`INSERT INTO users (email) VALUES ('${req.body.email}');`,
+          function(err, result2) {
+            if (err) {
+              console.log(err);
+              res.status(400).send(err);
+            }
+            const user = {
+              projects: [],
+              email: req.body.email,
+              theme: 'Dark'
+            };
+      // console.log(req.body);
+      // console.log(req.body.email);
+          res.status(200).send(JSON.stringify(user));
+          // res.status(200).send(user);
+        });
+      }
+      else{
+        const currentTheme = await getTheme(req.body.email);
+        // const listOfProjects = await getProjects(req.body.email);
+        const user = {
+        projects: listOfProjects,
+        email: req.body.email,
+        theme: currentTheme
+      };
+      // console.log(user);
+      res.status(200).send(user);
+    }
+  });
+});
+  
+
+app.get('/getProjects', function(req, res, next)){
+  client.query(`SELECT * FROM projects WHERE email = '${email}'`);
+  console.log(result.rows);
+  return result.rows;
+}
+
+
+// async function getProjects(email) {
+//   try {
+//     const result = await client.query(`SELECT * FROM projects WHERE email = '${email}'`);
+//     return result.rows;
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
+async function getTheme(email) {
+  try {
+    const result = await client.query(`SELECT theme FROM users WHERE email = '${email}'`);
+    return result.rows[0].theme;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+app.post('/changeTheme', function(req, res, next) {
+  console.log('update theme');
+  client.query(`UPDATE users SET theme = '${req.body.theme}' WHERE email = '${req.body.email}';`,
+    function(err, result) {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+      res.status(200).send();
+    }
+  );
+});
+
+app.post('/addProject', function(req, res, next) {
+  console.log('add project');
+  const date = new Date();
+  const date_start = `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
+  client.query(`INSERT INTO projects (project_name, start_date, checked, email) 
+  VALUES ('${req.body.email}','Add a new project name','${start_date}',false );`,
+    function(err, result) {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+      client.query(`SELECT * FROM projects WHERE email = '${req.body.email}'`, 
+      function(err, result) {
+        if (err) {
+          console.log(err);
+          res.status(400).send(err);
+        }
+        res.status(200).send(result.rows);
+      });
+    }
+  );
+});
+
+// app.get('/getProject', function(req, res) {
+//   // res.send('hello world');
+//   res.json({ success: true });
+// });
+
+// app.post('/deleteProject', function(req, res){
+
+// })
+
+// app.post('/renameProject', function(req, res){
+
+// })
+
+// app.post('/checkProject', function(req, res){
+
+// })
+
+// app.get('/getTasks', function(req, res) {
+//   // res.send('hello world');
+//   res.json({ success: true });
+// });
+
+// app.post('/createTask', function(req, res){
+
+// })
+
+// app.post('/renameTask', function(req, res){
+
+// })
+
+// app.post('/deleteTask', function(req, res){
+
+// })
+
+// app.post('/checkTask', function(req, res){
+
+// })
+
+
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))

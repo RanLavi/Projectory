@@ -1,0 +1,23 @@
+.about-layout{
+    height: 100%;
+    border-radius: 0.625rem;
+    background-color: #404146;
+    padding: 1.75rem 1.5rem 0 1.5rem;
+    width: 91.25%;
+    margin-left: auto;
+    margin-right: auto;
+    .about-header{
+        color: #FFFFFF;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+    }
+    .about-text {
+        height: 12rem;
+        width: 75%;
+        color: #CCD4DC;
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 1.5rem;
+    }
+}

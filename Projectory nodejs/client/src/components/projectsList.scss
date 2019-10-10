@@ -1,0 +1,142 @@
+.projectsList{
+    height: 100%;
+    width: 35%;
+    border-radius: 0.625rem;
+    background-color: #404146;
+    padding: 1.75rem 1.5rem 0 1.5rem;
+  
+    // margin-top: 8rem;
+    // margin-left: 8rem;
+
+    .projects-header{
+      display: flex;
+      justify-content: space-between;
+      // align-items: center;
+      .my-projects-header-text{
+        height: 1.5rem;
+        width: 50%;
+        color: #FFFFFF;
+        font-size: 1.5rem;
+        font-weight: 600;
+        // line-height: 22px;
+        margin-bottom: 2rem;
+      }
+      .new-project-header{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 1.5rem;
+        width: 50%;	
+        color: #42C8B5;
+        margin-top: 0.2rem;	
+        .new-project-header-text{
+          width: 90%;
+          font-size: 1.25rem;	
+          font-weight: bold;	
+          text-align: right;
+          // line-height: 19px;
+        }
+        .new-project-header-icon{
+          width: 10%;
+          height: 1.25rem;
+          background-image: url("../Assets/Dark theme/add_new_project.svg");
+          background-repeat: no-repeat;
+          background-position: right;
+          margin-left: 0.3rem;
+        }
+      }
+      // .project-item-parent{
+      //   &.clicked{
+      //     background-color: #323337;
+      //     border-radius: 0.625rem;
+      //   }
+      // }
+    }
+
+    .selected{
+      background-color: #26272e;
+      border-radius: 0.625rem;
+    }
+
+    // .project-item:hover{
+    //   background-color: #323337;
+    //   border-radius: 0.625rem;
+    // }
+    // .project-item.cross{
+    //   background-color: #373332;
+    //   border-radius: 0.625rem;
+    // }
+    // .project-item{
+    //   display: flex;
+    //   justify-content: space-between;
+    //   height: 2rem;
+    //   border-style: none none solid none; 
+    //   border-color: rgb(41, 48, 68);
+    //   .project-pick-by-name{
+    //     display: flex;
+    //     .project-pick{
+    //       height: 1.25rem;
+    //       width: 2rem;
+    //       background-image: url("../Assets/Dark theme/checkbox_regular.svg");
+    //       background-repeat: no-repeat;
+    //       background-position-y: center;
+    //     }
+    //     .project-name{
+    //       color: #CCD4DC;	
+    //       font-size: 1.2rem;
+    //       font-weight: 500;
+    //     }
+    //   } 
+    //   .project-create-date{
+        
+    //   }
+    // }
+  }
+  .tasksList{
+    height: 100%;
+    width: 50%;
+    border-radius: 0.625rem;
+    background-color: #404146;
+    padding: 1.75rem 1.5rem 0 1.5rem;
+    // margin-top: 8rem;
+    // margin-right: 8rem;
+    .tasks-header{
+      display: flex;
+      justify-content: space-between;
+      // align-items: center;
+
+      .current-project{
+        height: 1.5rem;
+        width: 50%;
+        color: #FFFFFF;
+        font-size: 1.5rem;
+        font-weight: 600;
+        // line-height: 22px;
+        margin-bottom: 2rem;
+      }
+      .new-task-header{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 1.5rem;
+        width: 50%;	
+        color: #42C8B5;
+        margin-top: 0.2rem;	
+        .new-task-header-text{
+          width: 92%;
+          font-size: 1.25rem;	
+          font-weight: bold;	
+          text-align: right;
+          // line-height: 19px;
+        }
+        .new-task-header-icon{
+          width: 8%;
+          height: 1.25rem;
+          background-image: url("../Assets/Dark theme/add_new_project.svg");
+          background-repeat: no-repeat;
+          background-position: right;
+          // margin-left: 0.3rem;
+        }
+      }
+    }
+  }
