@@ -20,73 +20,47 @@ class ProjectsListComponent extends Component {
       // tasks: [],
     };
 
-    this.loadProjects();
-    
+    this.loadProjects = this.loadProjects.bind(this);
+    // this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    // this.toggleShow = this.toggleShow.bind(this);
   }
 
   createKey(){
     return Math.random().toString(36).substr(2, 9);
   }
 
-projectAttributes = (projectID) => {
+projectAttributes = () => {
   return {
-    id: projectID,
-    // id: this.createKey(),
+    id: this.createKey(),
     // name: "Add New Project name", 
     tasks: [],
   }
 }
 
 async addProject(){
+  // console.log("Anastasia");
+  // var newProject = new ProjectsComponent();
+
   // ID generate random ID
   
-  // const newProject = this.projectAttributes();
-  // const updatedProjectsArray = [...this.state.projects, newProject];
-  // const chosenProject= newProject;
-  // this.setState({projects: updatedProjectsArray, chosenProject});
-
-  const response = await fetch('http://localhost:5000/addProject', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json',
-    'Accept': 'application/json' },
-    body: JSON.stringify({"email" : this.props.email})
-  });
-  const myJson = await response.json();
-  
-  const newProject = this.projectAttributes(myJson.project_id);
+  const newProject = this.projectAttributes();
   const updatedProjectsArray = [...this.state.projects, newProject];
   const chosenProject= newProject;
   this.setState({projects: updatedProjectsArray, chosenProject});
+
+    const response = await fetch('http://localhost:5000/addProject', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({"email" : this.props.email})
+  });
 }
 
   // this.setState({projects: [...this.state.projects, {name: "Add New Project name", tasks: []}], chosenProject: });
 
-  async loadProjects(){
-    // debugger;
-    const response = await fetch('http://localhost:5000/getProjects', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json',
-    'Accept': 'application/json' },
-    body: JSON.stringify({"email" : this.props.email})
-  });
-
-    const myJson = await response.json();
-    console.log(myJson);
-    
-
-    this.setState({projects: myJson})
-
-      this.renderProjects(this.state.projects);
-
-    console.log(this.state.projects);
-  }
   
 
 addTask(){
   const {projects, chosenProject} = this.state;
-    if(chosenProject===undefined){
-      return;
-    }
   const updatedProjectsArray = [...projects];
   const currentProjectIndex = projects.findIndex(p => p.id === chosenProject.id);
   updatedProjectsArray[currentProjectIndex].tasks.push({});
@@ -131,10 +105,6 @@ addTask(){
   // }
 
     renderProjects = (projects, chosenProject) => {
-      // debugger;
-    if(chosenProject === undefined){
-      return;
-    }
     return (
       projects.map((project, id) => (
         <div 
@@ -145,17 +115,25 @@ addTask(){
         </div>
       ))
     )
-    
   }
 
-//   componentDidMount() {
-//   this.loadProjects();
-// }
+  componentDidMount() {
+  this.loadProjects();
+}
 
+  async loadProjects(){
+    const response = await fetch('http://localhost:5000/getProjects');
 
+  const myJson = await response.json();
+  // console.log(myJson.email);
+  debugger;
+
+  this.setState({projects: myJson})
+  }
 
   render() {
     const {projects, chosenProject} = this.state;
+   
     return (
       <Layout>
           <div className="projectsList">
@@ -168,7 +146,7 @@ addTask(){
             </div>
             <div className="project-items-container">
             {/* {projects.map((i) => <ProjectsComponent key={`_${i}`} data={this.projectAttributes} handleClick={() => this.handleProjectClick(i)} />)} */}
-  
+
 
             {/* {projects.map((p, i) => <div onClick={() => this.handleProjectClick(i)}> <ProjectsComponent key={`${p.name}_${i}`} name={p.name} handleClick={this.handleProjectClick} /> </div>)} */}
     {this.renderProjects(projects, chosenProject)}

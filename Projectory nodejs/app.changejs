@@ -35,12 +35,13 @@ app.use(function(req, res, next) {
 const connectionString = 'postgres://postgres:postgres@localhost:5432/projectory';
 
 
+// const connectionString = process.env.DATABASE_URL;
 const client = new Client({
   connectionString: connectionString
 });
 client.connect();
 
-
+// app.use('/', express.static(path.join(__dirname, '/../client/public/')));
 app.use(express.static('/../client/public/'));
 router.get('/', function(req, res) {
   // res.send('hello world');
@@ -97,8 +98,23 @@ router.get('/', function(req, res) {
     }
   });
 });
+  
+
+// app.get('/getProjects', function(req, res, next){
+//   client.query(`SELECT * FROM projects WHERE email = '${email}'`);
+//   console.log(result.rows);
+//   return result.rows;
+// });
 
 
+// async function getProjects(email) {
+//   try {
+//     const result = await client.query(`SELECT * FROM projects WHERE email = '${email}'`);
+//     return result.rows;
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
 async function getTheme(email) {
   try {
     const result = await client.query(`SELECT theme FROM users WHERE email = '${email}'`);
@@ -121,32 +137,10 @@ app.post('/changeTheme', function(req, res, next) {
   );
 });
 
-app.post('/getProjects', async function(req, res, next){
-  console.log('get project');
-  try {
-    const ans = await client.query(`SELECT * FROM projects WHERE email = '${req.body.email}'`);
-      console.log(ans.rows);
-      res.status(200).send(ans.rows);
-  } catch (err) {
-    console.log(err);
-    res.status(400).send(err);
-  }
-
-  //   async function(err,result){
-  //     if (err) {
-  //         console.log(err);
-  //         res.status(400).send(err);
-  //       }
-  //     console.log(res.rows);
-  //     res.status(200).send(res.rows);
-  // });
-});
-
 app.post('/addProject', function(req, res, next) {
   console.log('add project');
   const date = new Date();
-  const start_date = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-  console.log(date);
+  const start_date = `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
   client.query(`INSERT INTO projects (email, project_name, start_date, checked) 
   VALUES ('${req.body.email}','Add a new project name','${start_date}',false );`,
     function(err, result) {
@@ -160,8 +154,6 @@ app.post('/addProject', function(req, res, next) {
           console.log(err);
           res.status(400).send(err);
         }
-        console.log('add project2');
-        // res.status(200).send(result);
         res.status(200).send(result.rows);
       });
     }

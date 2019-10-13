@@ -25,6 +25,7 @@ class LoginComponent extends Component {
   }
 
 async onSubmit() {
+  debugger;
   // if(true) // In case we want to check something
   // let emailAddress = document.getElementsByClassName('emailText')[0].innerText;
   // let password = document.getElementsByClassName('showPasswordText')[0].innerHTML;
@@ -35,13 +36,13 @@ async onSubmit() {
   const response = await fetch('http://localhost:5000/userConnection', {
     method: 'POST',
     // mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json',
-    'Accept': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({"email" : this.state.email})
   });
 
   const myJson = await response.json();
   // console.log(myJson.email);
+  debugger;
   this.props.loggedUser(myJson.email);
   this.props.switchDisplay(myJson.theme);
 
