@@ -21,7 +21,6 @@ class ProjectsListComponent extends Component {
     };
 
     this.loadProjects();
-    
   }
 
   createKey(){
@@ -62,7 +61,7 @@ async addProject(){
   // this.setState({projects: [...this.state.projects, {name: "Add New Project name", tasks: []}], chosenProject: });
 
   async loadProjects(){
-    // debugger;
+    debugger;
     const response = await fetch('http://localhost:5000/getProjects', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json',
@@ -70,13 +69,14 @@ async addProject(){
     body: JSON.stringify({"email" : this.props.email})
   });
 
-    const myJson = await response.json();
+    var myJson = await response.json();
     console.log(myJson);
+
     
 
     this.setState({projects: myJson})
 
-      this.renderProjects(this.state.projects);
+    // this.renderProjects(this.state.projects);
 
     console.log(this.state.projects);
   }
@@ -131,14 +131,14 @@ addTask(){
   // }
 
     renderProjects = (projects, chosenProject) => {
-      // debugger;
-    if(chosenProject === undefined){
-      return;
-    }
+      debugger;
+    // if(chosenProject === undefined){
+    //   return;
+    // }
     return (
       projects.map((project, id) => (
         <div 
-          className={`project-item-parent ${chosenProject.id===project.id ? 'selected' : ''}`} 
+          className={`project-item-parent ${chosenProject !== undefined && chosenProject.id===project.id ? 'selected' : ''}`} 
           onClick={() => this.handleProjectClick(project)}
         >   
           <ProjectsComponent key={`_${chosenProject}`} data={project.id} deleteProjectFromParent={(id) => this.deleteProject(id)} /> 

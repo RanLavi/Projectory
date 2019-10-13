@@ -121,26 +121,36 @@ app.post('/changeTheme', function(req, res, next) {
   );
 });
 
+// app.post('/getProjects', async function(req, res, next){
+//   console.log('get project');
+//   try {
+//     const ans = await client.query(`SELECT * FROM projects WHERE email = '${req.body.email}'`);
+//       console.log(ans.rows);
+//       res.status(200).send(ans.rows);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(400).send(err);
+//   }
+// });
+
 app.post('/getProjects', async function(req, res, next){
   console.log('get project');
-  try {
-    const ans = await client.query(`SELECT * FROM projects WHERE email = '${req.body.email}'`);
-      console.log(ans.rows);
-      res.status(200).send(ans.rows);
-  } catch (err) {
-    console.log(err);
-    res.status(400).send(err);
-  }
-
-  //   async function(err,result){
-  //     if (err) {
-  //         console.log(err);
-  //         res.status(400).send(err);
-  //       }
-  //     console.log(res.rows);
-  //     res.status(200).send(res.rows);
-  // });
+   client.query(`SELECT * FROM projects WHERE email = '${req.body.email}'`, 
+      function(err, result) {
+        if (err) {
+          console.log(err);
+          res.status(400).send(err);
+        }
+        console.log('add project2');
+        // res.status(200).send(result);
+        result.rows.forEach(r => {
+          r.tasks = [];
+        });
+        res.status(200).send(result.rows);
+      });
 });
+
+
 
 app.post('/addProject', function(req, res, next) {
   console.log('add project');
@@ -167,6 +177,15 @@ app.post('/addProject', function(req, res, next) {
     }
   );
 });
+
+  //   async function(err,result){
+  //     if (err) {
+  //         console.log(err);
+  //         res.status(400).send(err);
+  //       }
+  //     console.log(res.rows);
+  //     res.status(200).send(res.rows);
+  // });
 
 // app.get('/getProject', function(req, res) {
 //   // res.send('hello world');
