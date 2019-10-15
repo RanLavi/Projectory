@@ -82,13 +82,26 @@ async addProject(){
   }
   
 
-addTask(){
+async addTask(){
   const {projects, chosenProject} = this.state;
     if(chosenProject===undefined){
       return;
     }
+
+
+    debugger;
+    const response = await fetch('http://localhost:5000/addTask', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json',
+    'Accept': 'application/json' },
+    body: JSON.stringify({"project_id" : chosenProject.project_id})
+  });
+
+    var myJson = await response.json();
+    console.log(myJson);
+
   const updatedProjectsArray = [...projects];
-  const currentProjectIndex = projects.findIndex(p => p.id === chosenProject.id);
+  const currentProjectIndex = projects.findIndex(p => p.project_id === chosenProject.project_id);
   updatedProjectsArray[currentProjectIndex].tasks.push({});
   
     // updatedProjectsArray[currentProjectIndex].tasks.push({id: '', value: '',});
@@ -96,6 +109,8 @@ addTask(){
 
   // this.setState({tasks: [...this.state.tasks, {name: "Add New Task description"}]});
   this.setState({projects: updatedProjectsArray, currentProject: updatedProjectsArray[currentProjectIndex]});
+
+      console.log(this.state.projects);
 }
 
 // onSubmit = () => {
@@ -106,15 +121,31 @@ addTask(){
     this.setState({chosenProject: project});
   }
 
-  deleteProject(id){
-    console.log(id);
+  async deleteProject(project_id){
+    debugger;
+    console.log(project_id);
     // e.stopPropagation();
     const {projects} = this.state;
-    let currentProjectIndex = projects.findIndex(p => p.id === id);
+    let currentProjectIndex = projects.findIndex(project => project.project_id === project_id);
     console.log(currentProjectIndex);
-    const updatedProjectsArray = [...projects];
-    updatedProjectsArray.splice(currentProjectIndex, 1);
-    this.setState({projects: updatedProjectsArray});
+
+    const response = await fetch('http://localhost:5000/deleteProject', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json',
+    'Accept': 'application/json' },
+    body: JSON.stringify({"project_id" : project_id, "email" : this.props.email})
+  });
+
+    var myJson = await response.json();
+    console.log(myJson);
+
+
+    // const updatedProjectsArray = [...projects];
+    // updatedProjectsArray.splice(currentProjectIndex, 1);
+
+
+    this.setState({projects: myJson, undefined});
+    console.log(this.state.projects);
   }
 
   // renderProjects = (projects, chosenProjectIndex) => {
@@ -136,12 +167,12 @@ addTask(){
     //   return;
     // }
     return (
-      projects.map((project, id) => (
+      projects.map((project) => (
         <div 
-          className={`project-item-parent ${chosenProject !== undefined && chosenProject.id===project.id ? 'selected' : ''}`} 
+          className={`project-item-parent ${chosenProject !== undefined && chosenProject.project_id===project.project_id ? 'selected' : ''}`} 
           onClick={() => this.handleProjectClick(project)}
         >   
-          <ProjectsComponent key={`_${chosenProject}`} data={project.id} deleteProjectFromParent={(id) => this.deleteProject(id)} /> 
+          <ProjectsComponent key={`_${chosenProject}`} projectId={project.project_id} email={this.props.email} startDate={project.start_date} projectName={this.project_name} deleteProjectFromParent={(project_id) => this.deleteProject(project_id)} /> 
         </div>
       ))
     )

@@ -13,8 +13,12 @@ class ProjectsComponent extends Component {
 
     this.state = {
         isChecked: false,
+        project_name: 'Add a new project name',
     };
 
+    
+    this.handleProjectNameChange = this.handleProjectNameChange.bind(this);
+    this.updateProjectNameDB = this.updateProjectNameDB.bind(this);
     // this.handlePasswordChange = this.handlePasswordChange.bind(this);
     // this.toggleShow = this.toggleShow.bind(this);
   }
@@ -52,6 +56,24 @@ class ProjectsComponent extends Component {
     this.setState({ isChecked: !this.state.isChecked });
   }
 
+  handleProjectNameChange(e) {
+    this.setState({ project_name: e.target.value }, () => {
+      this.updateProjectNameDB();
+    });
+    debugger;
+  }
+
+  async updateProjectNameDB(){
+    debugger;
+    const response = await fetch('http://localhost:5000/renameProject', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json',
+    'Accept': 'application/json' },
+    body: JSON.stringify({'project_name' : this.state.project_name, 'project_id' : this.props.projectId, "email" : this.props.email})
+    });
+    debugger;
+  }
+
   // deleteProject(){
   //   document.getElementsByClassName("project-item")[0].remove();
   // }
@@ -66,13 +88,14 @@ class ProjectsComponent extends Component {
                     {/* <div className={`project-pick ${this.isProjectClicked() ? 'checked' : ''}`} onClick={() => this.onProjectClick()}/> */}
                     <div className={`project-pick ${this.state.isChecked ? 'checked' : ''}`} onClick={() => this.onProjectClick()}/>
                     <div className={`project-name-and-date ${this.state.isChecked ? 'cross' : ''}`}>
-                <input className="project-name" type="text" placeholder="Add a new project name"/>
+                <input className="project-name" type="text" placeholder="Add a new project name" {
+                  `${this.props.projectName === placeholder ? '' : this.props.projectName}`} onChange={this.handleProjectNameChange}/>
             {/* </div> */}
-            <div className="project-create-date">Today</div>
+            <div className="project-create-date">{this.props.startDate}</div>
             <div className="project-delete" onClick = {(e) => {
               // console.log("e ? ", e);
               e.stopPropagation();
-              this.props.deleteProjectFromParent(this.props.data)}}/>
+              this.props.deleteProjectFromParent(this.props.projectId)}}/>
               {/* </div> */}
               </div>
             </div>

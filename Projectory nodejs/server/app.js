@@ -178,6 +178,82 @@ app.post('/addProject', function(req, res, next) {
   );
 });
 
+
+app.post('/deleteProject', async function(req, res, next){
+  console.log('delete project');
+  const query = `DELETE FROM projects WHERE project_id = ${req.body.project_id};`;
+  client.query(query, function(err, result) {
+    if (err) {
+      console.log(query);
+      console.log(err);
+      res.status(400).send(err);
+    }
+    console.log('delete project2');
+    client.query(`SELECT * FROM projects WHERE email = '${req.body.email}'`, function(
+      err,
+      result
+    ) {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+      console.log('delete project3');
+      res.status(200).send(result.rows);
+    });
+  });
+});
+
+app.post('/renameProject', function(req, res, next) {
+  console.log('update name project');
+  const query = `UPDATE projects SET project_name = '${req.body.project_name}' WHERE project_id = ${req.body.project_id};`;
+  console.log(query);
+  client.query(
+    query,
+    function(err, result) {
+      if (err) {
+        console.log('update name project error');
+        console.log(err);
+        res.status(400).send(err);
+      }
+      client.query(`SELECT * FROM projects WHERE email = '${req.body.email}'`, function(
+        err,
+        result
+      ) {
+        if (err) {
+          console.log('update name project error2');
+          console.log(err);
+          res.status(400).send(err);
+        }
+        console.log('update name project2');
+        res.status(200).send(result.rows);
+      });
+    }
+  );
+});
+
+app.post('/addTask', function(req, res, next) {
+  console.log('add task');
+  client.query(
+    `INSERT INTO tasks (project_id, task_name) VALUES ('${req.body.project_id}','Add a new task name');`,
+    function(err, result) {
+      if (err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+      client.query(`SELECT * FROM tasks Where project_id = ${req.body.project_id}`, function(
+        err,
+        result
+      ) {
+        if (err) {
+          console.log(err);
+          res.status(400).send(err);
+        }
+        res.status(200).send(result.rows);
+      });
+    }
+  );
+});
+
   //   async function(err,result){
   //     if (err) {
   //         console.log(err);
@@ -192,9 +268,6 @@ app.post('/addProject', function(req, res, next) {
 //   res.json({ success: true });
 // });
 
-// app.post('/deleteProject', function(req, res){
-
-// })
 
 // app.post('/renameProject', function(req, res){
 
